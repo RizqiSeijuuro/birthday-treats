@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Promo Ultah</title>
+<meta name="description" content="Kumpulan birthday treat dari 37 brand di Indonesia: isi tanggal ultah, liat promo mana yang bisa diklaim kapan, dan centang yang udah diambil.">
+<meta property="og:title" content="Promo Ultah: semua birthday treat, satu tempat">
+<meta property="og:description" content="Isi tanggal ultah lo, liat promo mana yang bisa diklaim kapan, dan batas daftar membernya. Data lo cuma kesimpen di browser lo.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#ff4f79">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: party-poster board. Header, birthday panel, tabs, then a card grid (1 col on phones, 2 from 760px) or a claim timeline. */
+  --ink:#1b2350;
+  --ink-2:#555c88;
+  --paper:#f5f3ff;
+  --card:#ffffff;
+  --pink:#ff4f79;
+  --blue:#2f7cf6;
+  --green:#1fa45c;
+  --yellow:#ffd23f;
+  --orange:#ff9a1f;
+  --purple:#8b5cf6;
+  --line:#dcd9f0;
+  --display:"Baloo 2","Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3{text-wrap:balance}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:26px 16px 18px;border-bottom:2px solid var(--ink);background:#fff}
+#confetti{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-in{position:relative;max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.title{font-family:var(--display);font-weight:800;font-size:clamp(42px,12vw,78px);line-height:.88;margin:0;color:var(--ink);text-shadow:3px 3px 0 var(--yellow);letter-spacing:.5px}
+.ribbon{display:inline-block;margin-top:12px;background:var(--pink);color:#fff;font-family:var(--display);font-weight:700;font-size:clamp(15px,4.2vw,20px);line-height:1.2;padding:5px 14px 3px;border:2px solid var(--ink);border-radius:8px;box-shadow:3px 3px 0 var(--ink);transform:rotate(-1.5deg)}
+.checked{margin-top:12px;font-size:13px;font-weight:700;color:var(--ink-2)}
+.balloons{position:relative;width:96px;height:132px;flex:none}
+.balloon{position:absolute;width:48px;height:58px;border:2px solid var(--ink);border-radius:50% 50% 46% 46%/56% 56% 44% 44%}
+.balloon::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:54px;background:var(--ink);transform:translateX(-50%)}
+.b1{left:0;top:10px;background:var(--pink);transform:rotate(-12deg)}
+.b2{left:42px;top:0;background:#41c6d8;transform:rotate(9deg)}
+.b3{left:24px;top:40px;width:38px;height:46px;background:var(--yellow);transform:rotate(-3deg)}
+.b3::after{height:36px}
+
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 120px;display:flex;flex-direction:column;gap:18px}
+
+/* buttons & inputs */
+.btn{border:2px solid var(--ink);background:#fff;border-radius:12px;padding:9px 14px;font-weight:800;cursor:pointer;box-shadow:2px 2px 0 var(--ink);line-height:1.2}
+.btn:active{transform:translate(2px,2px);box-shadow:none}
+.btn.primary{background:var(--pink);color:#fff}
+.btn.danger{color:#c2183f}
+.btn.sm{padding:6px 11px;font-size:14px}
+select,input[type=text],input[type=number],input[type=search],textarea{border:2px solid var(--ink);border-radius:12px;background:#fff;padding:9px 12px;width:100%}
+select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 17px) 55%,calc(100% - 12px) 55%;background-size:5px 5px;background-repeat:no-repeat;padding-right:32px;font-weight:700}
+
+/* birthday panel */
+.panel{background:var(--card);border:2px solid var(--ink);border-radius:18px;box-shadow:5px 5px 0 var(--ink);padding:16px}
+.eyebrow{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.bf-title{font-family:var(--display);font-weight:800;font-size:26px;line-height:1.1;margin:0}
+.bf-text{margin:4px 0 12px;color:var(--ink-2);font-weight:600;max-width:60ch}
+.bf-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bf-row select{width:auto;min-width:84px}
+#b-m{min-width:140px}
+.err{color:#c2183f;font-weight:800;font-size:14px;margin-top:6px;min-height:0}
+.bday-row{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.bday-date{font-family:var(--display);font-weight:800;font-size:clamp(28px,8vw,38px);line-height:1}
+.bday-sub{font-weight:700;color:var(--ink-2);margin-top:4px}
+.bday-sub b{color:var(--pink)}
+.party{margin-top:8px;font-weight:800;background:var(--yellow);display:inline-block;padding:4px 10px;border-radius:8px;border:2px solid var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stat{border:2px solid var(--ink);border-radius:12px;padding:8px 10px;text-align:left;cursor:pointer;background:#fff}
+.stat b{display:block;font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:12.5px;font-weight:800;line-height:1.2;margin-top:2px}
+.stat.s-act{background:#d4f5e1}
+.stat.s-soon{background:#e3ecff}
+.stat.s-done{background:#fff1c7}
+.mbox{margin-top:14px;border:2px dashed var(--ink);border-radius:12px;padding:10px 12px;background:#fffaf0}
+.mbox h3{margin:0 0 6px;font-size:15px;font-weight:800}
+.mbox ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:14.5px}
+.mbox li b{font-weight:800}
+.mbox .late{color:var(--ink-2);font-size:13.5px;margin-top:6px}
+.linkbtn{background:none;border:0;padding:0;font-weight:800;text-decoration:underline;text-underline-offset:2px;cursor:pointer;color:var(--ink)}
+
+/* tabs & filters */
+.tabs{display:flex;border:2px solid var(--ink);border-radius:14px;overflow:hidden;background:#fff;box-shadow:3px 3px 0 var(--ink)}
+.tab{flex:1;padding:10px 8px;font-family:var(--display);font-weight:800;font-size:17px;border:0;background:transparent;cursor:pointer;line-height:1.1}
+.tab+.tab{border-left:2px solid var(--ink)}
+.tab[aria-selected="true"]{background:var(--blue);color:#fff}
+.searchbox{position:relative}
+.searchbox svg{position:absolute;left:13px;top:50%;width:18px;height:18px;transform:translateY(-50%);stroke:var(--ink);fill:none;stroke-width:2.4}
+.searchbox input{padding-left:40px;font-weight:700}
+.filters{display:flex;flex-direction:column;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:6px 12px;font-weight:800;font-size:14px;cursor:pointer;line-height:1.15}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff}
+.chip.cat[aria-pressed="true"]{background:var(--yellow);color:var(--ink)}
+.listhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.count{font-weight:800;color:var(--ink-2);font-size:14px}
+.sortsel{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:800}
+.sortsel select{width:auto;padding:6px 30px 6px 10px;font-size:14px}
+
+/* cards */
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+.card{position:relative;background:var(--card);border:2px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink);padding:16px 14px 13px;display:flex;flex-direction:column;gap:10px;cursor:pointer}
+.card::before{content:"";position:absolute;left:16px;width:56px;top:-2px;height:6px;border-radius:0 0 6px 6px;background:var(--cat,var(--ink))}
+.card:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
+.card.st-active{box-shadow:4px 4px 0 var(--green)}
+.card.st-past:not(.is-claimed),.card.st-na{opacity:.62}
+.card.is-claimed{background:#f2fbf5}
+.c-top{display:flex;align-items:center;gap:10px}
+.av{flex:none;width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--av,#ffe08a);display:grid;place-items:center;font-size:22px;line-height:1}
+.av.big{width:56px;height:56px;font-size:28px}
+.c-id{flex:1;min-width:0}
+.c-name{background:none;border:0;padding:0;text-align:left;cursor:pointer;font-family:var(--display);font-weight:800;font-size:21px;line-height:1.05;overflow-wrap:anywhere}
+.c-sub{font-size:13px;font-weight:700;color:var(--ink-2)}
+.c-treat{margin:0;font-weight:800;font-size:17px;line-height:1.3}
+.chk{flex:none;width:40px;height:40px;border-radius:50%;border:2px solid var(--ink);background:#fff;display:grid;place-items:center;cursor:pointer;padding:0}
+.chk svg{width:20px;height:20px;fill:none;stroke:#c9c6df;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.chk:hover svg{stroke:var(--green)}
+.chk.on{background:var(--green)}
+.chk.on svg{stroke:#fff}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.wb,.tag{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:800;padding:3px 8px;border-radius:8px;border:1.5px solid var(--ink);line-height:1.2;background:#fff}
+.wb svg{width:13px;height:13px;fill:none;stroke:var(--ink);stroke-width:2.2}
+.w-h{background:#ffe9a6}.w-3{background:#c4efea}.w-7{background:#cdf2d4}.w-77{background:#cfe0ff}.w-14{background:#dcd5ff}.w-30{background:#efd7ff}.w-month{background:#ffd3df}
+.t-mem{background:#fff1c7}
+.t-nomem{background:#e5f8ec}
+.t-warn{background:#ffdcb8}
+.t-new{background:var(--ink);color:#fff;border-color:var(--ink)}
+.t-own{background:var(--purple);color:#fff}
+.pill{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;padding:7px 10px;border-radius:10px;line-height:1.25}
+.pill.active{background:#d4f5e1;color:#0a5a30}
+.pill.active::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--green);animation:pulse 1.6s infinite}
+.pill.soon{background:#e3ecff;color:#173b8a}
+.pill.past{background:#eeedf5;color:#565a76}
+.pill.claimed{background:#d4f5e1;color:#0a5a30}
+.pill.na{background:#fff0d6;color:#6e4300}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,164,92,.55)}70%{box-shadow:0 0 0 7px rgba(31,164,92,0)}100%{box-shadow:0 0 0 0 rgba(31,164,92,0)}}
+.mwarn{font-size:13.5px;font-weight:700;background:#fff7e0;border-left:4px solid var(--orange);padding:6px 10px;border-radius:6px}
+.mwarn.late{border-left-color:#b9b6cf;background:#f4f3f9;color:var(--ink-2)}
+.empty{text-align:center;padding:30px 16px;border:2px dashed var(--ink);border-radius:16px;background:#fff}
+.empty p{font-weight:700;margin:0 0 10px}
+
+/* timeline */
+.sec-title{font-family:var(--display);font-weight:800;font-size:24px;margin:0;line-height:1.1}
+.sec-sub{margin:4px 0 0;color:var(--ink-2);font-weight:600;font-size:14.5px;max-width:65ch}
+.tl-wrap{overflow-x:auto;border:2px solid var(--ink);border-radius:16px;background:#fff;box-shadow:4px 4px 0 var(--ink)}
+.tl{min-width:320px;padding:12px 12px 14px}
+@media (max-width:600px){.tl-axis,.tl-row{grid-template-columns:92px 1fr!important}.tl-ov{left:100px!important}.tl-name{font-size:12px}.tl-tick.minor{visibility:hidden}}
+.tl-axis{display:grid;grid-template-columns:120px 1fr;gap:8px;margin-bottom:4px}
+.tl-ticks{position:relative;height:34px}
+.tl-tick{position:absolute;top:0;transform:translateX(-50%);font-size:11.5px;font-weight:800;text-align:center;white-space:nowrap;line-height:1.15}
+.tl-tick small{display:block;font-weight:700;color:var(--ink-2);font-size:10.5px}
+.tl-tick.h{color:#a06b00}
+.tl-body{position:relative}
+.tl-ov{position:absolute;top:0;bottom:0;left:128px;right:0;pointer-events:none}
+.tl-line{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.tl-hcol{position:absolute;top:0;bottom:0;background:rgba(255,210,63,.45)}
+.tl-now{position:absolute;top:0;bottom:0;width:2px;background:var(--pink)}
+.tl-row{display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:center;padding:3px 0;cursor:pointer;border:0;background:none;width:100%;text-align:left}
+.tl-row:hover .tl-name{text-decoration:underline}
+.tl-name{font-size:12.5px;font-weight:800;line-height:1.15;overflow-wrap:anywhere}
+.tl-track{position:relative;height:20px}
+.tl-bar{position:absolute;top:2px;bottom:2px;border-radius:7px;border:1.5px solid var(--ink);min-width:8px}
+.bar-active{background:var(--green)}
+.bar-soon{background:#9dbdff}
+.bar-past{background:#d6d5e3}
+.bar-claimed{background:repeating-linear-gradient(45deg,#76d39f 0 6px,#c3eed4 6px 12px)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;font-weight:700;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:22px;height:12px;border-radius:4px;border:1.5px solid var(--ink);display:inline-block}
+.sw.line{width:3px;height:16px;border:0;background:var(--pink);border-radius:0}
+.sw.h{background:rgba(255,210,63,.6);border:0}
+
+/* agenda */
+.ag-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px}
+.ag{display:flex;flex-direction:column}
+.ag-day{display:grid;grid-template-columns:58px 1fr;gap:12px;padding:12px 0;border-top:2px dashed var(--line)}
+.ag-day:first-child{border-top:0}
+.ag-date{border:2px solid var(--ink);border-radius:12px;background:#fff;text-align:center;padding:5px 0 4px;font-family:var(--display);line-height:1;align-self:start;box-shadow:2px 2px 0 var(--ink)}
+.ag-date b{display:block;font-size:24px}
+.ag-date span{font-size:12px;font-weight:700}
+.ag-date.today{background:var(--yellow)}
+.ag-date.hday{background:var(--pink);color:#fff}
+.ag-when{font-weight:800;font-size:13.5px;color:var(--ink-2);margin-bottom:4px}
+.ag-items{display:flex;flex-direction:column;gap:6px}
+.ag-item{display:flex;align-items:baseline;gap:8px;background:none;border:0;padding:0;text-align:left;cursor:pointer;font-size:15px;line-height:1.3}
+.ag-item.done{opacity:.55}
+.ag-item .nm{font-weight:800}
+.ag-item .tr{color:var(--ink-2);font-weight:600}
+.k{flex:none;font-size:11.5px;font-weight:800;padding:2px 7px;border-radius:6px;border:1.5px solid var(--ink);white-space:nowrap}
+.k-start{background:#cdf2d4}.k-end{background:#ffd3df}.k-only{background:#ffe9a6}.k-mem{background:#fff1c7}
+
+/* sheet */
+.overlay{position:fixed;inset:0;background:rgba(27,35,80,.5);display:flex;align-items:flex-end;justify-content:center;z-index:60}
+.sheet{background:#fff;width:100%;max-width:580px;max-height:90%;overflow:auto;border:2px solid var(--ink);border-bottom:0;border-radius:22px 22px 0 0;padding:18px 18px calc(26px + env(safe-area-inset-bottom))}
+@media (min-width:640px){.overlay{align-items:center;padding:24px}.sheet{border-radius:22px;border-bottom:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}}
+.sh-head{display:flex;gap:12px;align-items:center}
+.sh-head h2{font-family:var(--display);font-weight:800;font-size:26px;margin:0;line-height:1.05}
+.x{margin-left:auto;flex:none;width:40px;height:40px;border-radius:50%;border:2px solid var(--ink);background:#fff;font-size:22px;font-weight:800;cursor:pointer;line-height:1}
+.sh-treat{font-size:20px;font-weight:800;margin:14px 0 10px;line-height:1.25}
+.sheet h3{font-size:15px;font-weight:800;margin:16px 0 6px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.period{margin:12px 0 8px;font-weight:700}
+.req{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.req li{position:relative;padding-left:26px;font-weight:600}
+.req li::before{content:"";position:absolute;left:2px;top:4px;width:14px;height:14px;border-radius:4px;border:2px solid var(--ink);background:#fff}
+.note{margin-top:14px;background:#fff4dc;border:2px solid var(--orange);border-radius:12px;padding:10px 12px;font-weight:600;font-size:14.5px}
+.srcs{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:700}
+.srcs a{color:var(--blue)}
+.hint{margin-top:10px;font-weight:700;color:var(--ink-2);font-size:14px}
+.sh-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.vb{display:inline-flex;align-self:flex-start;font-size:12.5px;font-weight:800;padding:3px 8px;border-radius:8px;border:1.5px solid var(--ink);margin-bottom:6px}
+.vb.ok{background:#d4f5e1}.vb.satu{background:#e3ecff}.vb.sebagian{background:#fff1c7}.vb.beda{background:#ffdcb8}.vb.own{background:var(--purple);color:#fff}
+
+/* form */
+.form{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field>label,.field legend{font-weight:800;font-size:14.5px}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+.radios{display:flex;flex-wrap:wrap;gap:8px}
+.radios label{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer;background:#fff;font-size:14.5px}
+.radios input{accent-color:var(--pink);margin:0}
+.radios label:has(input:checked){background:var(--yellow)}
+.emo label{padding:4px 8px;font-size:20px}
+.emo input{position:absolute;opacity:0;width:1px;height:1px}
+.emo label:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.checkline{display:flex;align-items:center;gap:8px;font-weight:800}
+.checkline input{width:20px;height:20px;accent-color:var(--pink)}
+.help{font-size:13px;color:var(--ink-2);font-weight:600}
+
+/* FAB, toast, footer */
+.fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:40;background:var(--pink);color:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);border-radius:999px;padding:12px 18px;font-family:var(--display);font-weight:800;font-size:17px;cursor:pointer;line-height:1}
+.fab:active{transform:translate(2px,2px);box-shadow:none}
+#toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-weight:800;padding:10px 16px;border-radius:12px;opacity:0;transition:opacity .2s,transform .2s;z-index:70;pointer-events:none;max-width:calc(100% - 32px);text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{font-size:13.5px;color:var(--ink-2);font-weight:600;border-top:2px dashed var(--line);padding-top:14px;max-width:70ch}
+.foot p{margin:0 0 8px}
+.sync{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--ink)}
+.sync::before{content:"";width:8px;height:8px;border-radius:50%;background:#b9b6cf}
+.sync.cloud::before{background:var(--green)}
+.sync.error::before,.sync.slow::before{background:var(--orange)}
+@media (max-width:420px){.balloons{width:70px;height:110px;transform:scale(.8);transform-origin:right top}.stat b{font-size:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-chk" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+</svg>
+
+<header class="hero">
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <div>
+      <h1 class="title">PROMO<br>ULTAH</h1>
+      <div class="ribbon">Semua birthday treat, satu tempat</div>
+      <div class="checked">Data dicek ulang 19 Nov 2026 · <span id="total-count">37</span> promo</div>
+    </div>
+    <div class="balloons" aria-hidden="true"><span class="balloon b1"></span><span class="balloon b2"></span><span class="balloon b3"></span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="panel" id="bday" aria-label="Tanggal ultah"></section>
+
+  <div class="tabs" role="tablist" aria-label="Tampilan">
+    <button class="tab" role="tab" id="tab-promo" aria-controls="view-promo" data-tab="promo">Daftar promo</button>
+    <button class="tab" role="tab" id="tab-jadwal" aria-controls="view-jadwal" data-tab="jadwal">Jadwal klaim</button>
+  </div>
+
+  <section id="view-promo" role="tabpanel" aria-labelledby="tab-promo">
+    <div class="filters">
+      <div class="searchbox">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+        <label for="q" class="sr">Cari promo</label>
+        <input id="q" type="search" placeholder="Cari brand atau hadiah, mis. sushi, cake, kopi" autocomplete="off">
+      </div>
+      <div class="chips" id="chips-cat" aria-label="Kategori"></div>
+      <div class="chips" id="chips-f" aria-label="Filter syarat"></div>
+      <div class="listhead">
+        <div class="count" id="count" aria-live="polite"></div>
+        <div class="sortsel"><label for="sort">Urutin</label>
+          <select id="sort">
+            <option value="relevan">Paling relevan</option>
+            <option value="az">Nama A–Z</option>
+            <option value="panjang">Periode terpanjang</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="grid" id="grid" style="margin-top:14px"></div>
+  </section>
+
+  <section id="view-jadwal" role="tabpanel" aria-labelledby="tab-jadwal" hidden></section>
+
+  <footer class="foot">
+    <p>Data awal dari poster Promo Ultah yang beredar di medsos, lalu dicek ulang ke artikel 2026 (Tuwaga, IDN Times, ESB, Beautynesia, Disway, Bloomberg Technoz) dan akun resmi brand. Syarat bisa beda per cabang dan bisa berubah kapan aja, jadi konfirmasi ke outlet sebelum pesan. Jangan lupa bawa KTP.</p>
+    <p>Logo brand gak ditampilin; ikon di kartu cuma penanda.</p>
+    <p><span class="sync" id="sync">Data lo cuma kesimpen di browser ini</span></p>
+  </footer>
+</main>
+
+<button class="fab" id="fab" type="button">+ Tambah promo</button>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="modal-root"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- sources ---------- */
+const SRC={
+  poster:{n:"Poster Promo Ultah yang beredar di medsos"},
+  tuwaga:{n:"Tuwaga, 24 Promo Ulang Tahun (Feb 2026)",u:"https://tuwaga.id/artikel/promo-ulang-tahun-makan-gratis-2026/"},
+  tuwaga2:{n:"Tuwaga, Promo Ulang Tahun April 2026",u:"https://tuwaga.id/artikel/promo-ulang-tahun-makan-gratis-2026-terbaru/"},
+  idn:{n:"IDN Times, Birthday Treat (Agu 2026)",u:"https://www.idntimes.com/food/dining-guide/promo-birthday-treat-untuk-si-leo-yang-berulang-tahun-00-mk1yf-q9hj4d"},
+  esb:{n:"ESB, Birthday Treats (Jul 2026)",u:"https://www.esb.id/en/inspirasi/birthday-treats"},
+  beauty:{n:"Beautynesia, Promo Birthday Treat (Feb 2026)",u:"https://www.beautynesia.id/life/kumpulan-promo-birthday-treat-februari-2026-ada-restoran-hingga-theme-park/b-315190"},
+  disway:{n:"Disway, 20 Promo Birthday Treats (Mei 2026)",u:"https://disway.id/read/944713/20-promo-birthday-treats-mei-2026-lengkap-minuman-dan-makanan-ada-teazzi-sushi-tei-hingga-marugame-udon/30"},
+  bloomberg:{n:"Bloomberg Technoz (Agu 2026)",u:"https://www.bloombergtechnoz.com/detail-news/118096/daftar-promo-birthday-treat-agustus-2026-dan-cara-mendapatkannya/2"},
+  sbux:{n:"FAQ resmi Starbucks Indonesia",u:"https://starbucks.co.id/frequently-asked-questions"},
+  karnivor:{n:"TikTok resmi @karnivor_id",u:"https://www.tiktok.com/@karnivor_id/video/7527925400710810898"},
+  kokuo:{n:"Postingan pengguna di X (2026)",u:"https://x.com/Lenny_diary/status/2013167026731446328"},
+  gigglebox:{n:"TikTok @giggleboxcafe",u:"https://www.tiktok.com/discover/resto-yang-ngasih-birthday-treat-bandung?lang=en"},
+  momsmoney:{n:"Kontan MomsMoney, Chatime Birthday Treats",u:"https://momsmoney.kontan.co.id/news/promo-chatime-birthday-treats-pakai-aplikasi-fb-id-dan-dapatkan-diskon-50"}
+};
+
+/* ---------- data ----------
+   w: {f,t} = offset hari dari H (f mulai, t sampai), atau {m:1} = sebulan penuh di bulan ultah
+   b.k: none = gak perlu beli, any = beli apa aja tanpa min. nominal, min = ada minimal / diskon
+   l: daftar member min. l hari sebelum ultah
+   v: ok = >=2 sumber/resmi, satu = 1 sumber, sebagian, beda = info bertentangan */
+const BUILTIN=[
+{id:"kokuo",n:"Kokuo",s:"Family Massage & Reflexology",c:"lainnya",e:"💆",t:"Buy 1 Get 1 treatment pijat",k:"b1g1",r:["Beli 1 treatment","Bawa KTP","Daftar member (gratis, bisa langsung di tempat)"],w:{f:0,t:0},b:{k:"min",t:"Beli 1 treatment"},m:true,v:"ok",note:"Kokuo itu tempat pijat & refleksi, bukan resto. Dulu promonya sempat free pijat 90 menit; versi terbaru Buy 1 Get 1.",src:["poster","kokuo"],poster:true},
+{id:"zenbu",n:"Zenbu",s:"House of Mozaru",c:"makanan",e:"🧀",t:"Free Mini Mozaru",k:"gratis",r:["Min. belanja Rp50.000 (1 main course)","Tunjukin KTP","Dine-in"],w:{f:0,t:7},b:{k:"min",t:"Min. Rp50rb"},m:false,v:"ok",note:"Beberapa cabang minta kasih review Google Maps atau tag IG mereka.",src:["poster","tuwaga2"],poster:true},
+{id:"teazzi",n:"Teazzi",s:"Tea shop",c:"minuman",e:"🧋",t:"Free 1 minuman pilihan",k:"gratis",r:["Wajib punya member / loyalty card","Daftar paling lambat H-1","Dateng ke outlet pas hari H"],w:{f:0,t:0},b:{k:"none",t:"Gak perlu beli"},m:true,l:1,v:"ok",src:["poster","idn"],poster:true},
+{id:"boost",n:"Boost Juice",s:"Juice bar",c:"minuman",e:"🥤",t:"Free 1 juice / smoothie (varian & ukuran bebas)",k:"gratis",r:["Member Vibe Club yang udah pernah transaksi","Scan member pas klaim","Bawa KTP"],w:{f:-2,t:2},b:{k:"none",t:"Gak perlu beli"},m:true,v:"beda",note:"Poster & Disway (Mei 2026) bilang H-14 s.d. H+14, tapi Tuwaga (Feb 2026), ESB (Jul 2026) dan IDN Times (Agu 2026) bilang cuma sekitar H-2 s.d. H+2. Di sini dipake yang lebih ketat biar aman.",src:["poster","tuwaga","idn","disway"],poster:true},
+{id:"starbucks",n:"Starbucks",s:"Starbucks Rewards",c:"dessert",e:"🍰",t:"Free 1 slice cake + 25 bonus Stars",k:"gratis",r:["Member Starbucks Rewards","Terdaftar min. 1 bulan sebelum ultah","Gak perlu beli apa-apa"],w:{f:0,t:30},b:{k:"none",t:"Gak perlu beli"},m:true,l:30,v:"ok",note:"Di hari H lo juga dapet 2x Stars buat transaksi.",src:["poster","sbux","tuwaga"],poster:true},
+{id:"tawan",n:"Ta Wan",s:"Restoran Chinese",c:"makanan",e:"🍜",t:"Free Mie Goreng Ulang Tahun",k:"gratis",r:["Beli 1 menu apa aja","Tunjukin KTP asli","Dine-in"],w:{f:0,t:7},b:{k:"any",t:"Beli 1 menu"},m:false,v:"ok",src:["poster","tuwaga","idn"],poster:true},
+{id:"fore",n:"Fore Coffee",s:"Kopi",c:"minuman",e:"☕",t:"Buy 1 Get 1 minuman (regular)",k:"b1g1",r:["Member app Fore min. 3 bulan sebelum ultah","Lengkapi data profil","Pesen & klaim voucher lewat app"],w:{f:0,t:30},b:{k:"min",t:"Beli 1 minuman"},m:true,l:90,v:"ok",note:"Voucher berlaku sekitar 1 bulan sejak terbit. Kalau daftarnya kurang dari 3 bulan sebelum ultah, voucher baru keluar tahun depan.",src:["poster","tuwaga","idn"],poster:true},
+{id:"gigglebox",n:"Gigglebox",s:"Cafe & resto",c:"dessert",e:"🥞",t:"Free es krim / pancake",k:"gratis",r:["Beli menu apa aja (tanpa minimal)","Tunjukin KTP"],w:{f:-7,t:7},b:{k:"any",t:"Beli apa aja"},m:false,v:"sebagian",note:"Treat gratisnya dikonfirmasi akun resmi Gigglebox, tapi periode H-7 s.d. H+7 cuma ada di poster. Tanya outlet dulu.",src:["poster","gigglebox"],poster:true},
+{id:"ichiban",n:"Ichiban Sushi",s:"Sushi",c:"makanan",e:"🍣",t:"Free Birthday Sushi (6 mini sushi)",k:"gratis",r:["Tunjukin KTP asli","Dine-in","Sebagian cabang minta order min. 1 item"],w:{f:0,t:7},b:{k:"any",t:"Order 1 item"},m:false,v:"ok",src:["poster","tuwaga","esb"],poster:true},
+{id:"nannys",n:"Nanny's Pavillon",s:"Pancake & pasta",c:"dessert",e:"🌈",t:"Free Rainbow Pancake + dinyanyiin",k:"gratis",r:["Beli 1 main course (tanpa minimal nominal)","Tunjukin KTP / KIA / kartu pelajar","Follow IG & TikTok @nannyspavillon"],w:{f:-1,t:7},b:{k:"min",t:"Beli 1 main course"},m:false,v:"ok",src:["poster","beauty","tuwaga"],poster:true},
+{id:"karnivor",n:"Karnivor",s:"Steak",c:"dessert",e:"🎂",t:"Free Terra Cake",k:"gratis",r:["Beli 1 main course apa aja","Tunjukin KTP / KIA / kartu pelajar / KK","Follow IG & TikTok @karnivor_id"],w:{f:-1,t:7},b:{k:"min",t:"Beli 1 main course"},m:false,v:"ok",note:"Berlaku di semua cabang Karnivor.",src:["poster","karnivor","beauty"],poster:true},
+{id:"marugame",n:"Marugame Udon",s:"Udon & tempura",c:"makanan",e:"🍲",t:"Free Niku Udon + Ocha",k:"gratis",r:["Member app Marugame, daftar min. 31 hari sebelum ultah","Sebutin no. HP terdaftar + bawa KTP","Dine-in"],w:{f:-7,t:7},b:{k:"none",t:"Gak perlu beli"},m:true,l:31,v:"ok",src:["poster","tuwaga","idn"],poster:true},
+{id:"genki",n:"Genki Sushi",s:"Sushi",c:"makanan",e:"🍣",t:"Free Birthday Sushi",k:"gratis",r:["Member MAP Club","Tunjukin KTP","Dine-in"],w:{f:0,t:7},b:{k:"none",t:"Gak perlu beli"},m:true,v:"ok",src:["poster","tuwaga"],poster:true},
+{id:"holycow",n:"Holycow! Steakhouse",s:"by Chef Afit",c:"makanan",e:"🥩",t:"Free chicken steak",k:"gratis",r:["Min. beli 1 minuman","Tunjukin KTP","Kebijakan bisa beda per cabang"],w:{f:0,t:0},b:{k:"min",t:"Beli 1 minuman"},m:false,v:"beda",note:"Tuwaga (Feb 2026) dan ESB (Jul 2026) nyebut treat-nya Spaghetti Aglio Olio gratis, bukan chicken steak. Kemungkinan beda per cabang atau periode, jadi tanya dulu sebelum pesan.",src:["poster","tuwaga","esb"],poster:true},
+{id:"sushitei",n:"Sushi Tei",s:"Sushi",c:"makanan",e:"🍱",t:"Free Sushi Birthday Cake + dinyanyiin",k:"gratis",r:["Tunjukin KTP asli","Dine-in"],w:{f:0,t:7},b:{k:"none",t:"Gak perlu beli"},m:false,v:"beda",note:"Disway (Mei 2026) bilang bisa dari H-7. Di sini dipake H s.d. H+7 (Tuwaga & ESB 2026) biar aman.",src:["tuwaga","esb","disway"]},
+{id:"pepperlunch",n:"Pepper Lunch",s:"Teppan",c:"makanan",e:"🍛",t:"Free Beef Pepper Rice (Bandung) / diskon s.d. 50% (kota lain)",k:"diskon",r:["Beli 1 main course","Tunjukin KTP / kartu pelajar asli","Dine-in"],w:{f:-7,t:7},b:{k:"min",t:"Beli 1 main course"},m:false,v:"ok",note:"Ada juga diskon member Boga App sampai H+14: 30% (Red/Silver, maks Rp75rb) atau 50% (Gold/Platinum).",src:["tuwaga","esb","beauty"]},
+{id:"bakmigm",n:"Bakmi GM",s:"Bakmi",c:"makanan",e:"🥟",t:"E-voucher gratis (terakhir: 5 pangsit goreng)",k:"gratis",r:["Member app Bakmi GM","Daftar paling lambat H-1","Voucher muncul di app"],w:{f:0,t:7},b:{k:"any",t:"Cek voucher di app"},m:true,l:1,v:"beda",note:"Hadiahnya pernah ganti-ganti (dulu Crispy Chips Mayo). Periode pastinya ikut voucher di app.",src:["tuwaga"]},
+{id:"dcost",n:"D'Cost",s:"Seafood",c:"makanan",e:"🍝",t:"Free Spaghetti Bolognese",k:"gratis",r:["Tunjukin KTP asli","Beli menu apa aja","Dine-in"],w:{f:0,t:7},b:{k:"any",t:"Beli apa aja"},m:false,v:"ok",src:["tuwaga","esb"]},
+{id:"pancious",n:"Pancious",s:"Pancake",c:"dessert",e:"🥞",t:"Free birthday pancake + balon + dinyanyiin",k:"gratis",r:["Tunjukin KTP asli","Beli menu apa aja","Dine-in"],w:{f:0,t:7},b:{k:"any",t:"Beli apa aja"},m:false,v:"ok",src:["tuwaga","esb"]},
+{id:"babydutch",n:"Baby Dutch Pancake",s:"Pancake",c:"dessert",e:"🧁",t:"Free birthday cake + lilin",k:"gratis",r:["Tunjukin KTP","Beli menu apa aja","Dine-in","Balon & lagu bisa request"],w:{f:-7,t:7},b:{k:"any",t:"Beli apa aja"},m:false,v:"ok",src:["tuwaga","esb"]},
+{id:"pizzahut",n:"Pizza Hut Restaurant",s:"Bukan PHD",c:"makanan",e:"🍕",t:"Free birthday pizza (topping manis)",k:"gratis",r:["Tunjukin KTP","Dine-in di Pizza Hut Restaurant"],w:{f:-7,t:7},b:{k:"any",t:"Dine-in"},m:false,v:"ok",src:["tuwaga","esb"]},
+{id:"union",n:"Union",s:"Union Group",c:"dessert",e:"🍫",t:"Free chocolate cake",k:"gratis",r:["Member Union Group","Order menu apa aja","Transaksi pas hari H"],w:{f:0,t:0},b:{k:"any",t:"Beli apa aja"},m:true,v:"ok",src:["tuwaga","esb"]},
+{id:"excelso",n:"Excelso",s:"Kopi",c:"dessert",e:"🍌",t:"Free banana wraps",k:"gratis",r:["Tunjukin KTP asli","Dine-in"],w:{f:0,t:7},b:{k:"any",t:"Dine-in"},m:false,v:"ok",src:["tuwaga","esb"]},
+{id:"tanatap",n:"Tanatap Coffee",s:"Kopi",c:"dessert",e:"🍰",t:"Free banana cake",k:"gratis",r:["Tunjukin KTP asli","Beli menu apa aja","Dine-in"],w:{f:0,t:3},b:{k:"any",t:"Beli apa aja"},m:false,v:"ok",src:["tuwaga","esb"]},
+{id:"remboelan",n:"Remboelan",s:"Masakan Indonesia",c:"dessert",e:"🍧",t:"Free birthday ice treat",k:"gratis",r:["Tunjukin KTP","Dine-in"],w:{f:0,t:7},b:{k:"any",t:"Dine-in"},m:false,v:"satu",src:["tuwaga"]},
+{id:"waki",n:"Waki BBQ",s:"Japanese BBQ",c:"makanan",e:"🥩",t:"Free set sirloin + ocha + puding",k:"gratis",r:["Tunjukin KTP","Cuma kalau ultah jatuh Senin–Kamis"],w:{f:0,t:0},days:[1,2,3,4],b:{k:"any",t:"Dine-in"},m:false,v:"satu",src:["tuwaga"]},
+{id:"chatime",n:"Chatime",s:"Bubble tea",c:"minuman",e:"🧋",t:"Diskon 50% (maks Rp20.000)",k:"diskon",r:["Beli lewat app F&B ID","Terdaftar min. 3 bulan","Sekali pakai di bulan ultah"],w:{m:1},b:{k:"min",t:"Belanja dulu"},m:true,l:90,v:"ok",src:["tuwaga","momsmoney"]},
+{id:"kimukatsu",n:"Kimukatsu",s:"Boga Group",c:"makanan",e:"🍱",t:"Diskon 30–50% sesuai level member Boga",k:"diskon",r:["Member Boga App","Tunjukin KTP","Red/Silver 30% (maks Rp75rb), Gold/Platinum 50% (maks Rp125rb)"],w:{f:0,t:14},b:{k:"min",t:"Belanja dulu"},m:true,v:"ok",src:["tuwaga","idn","beauty"]},
+{id:"yakiniku",n:"Yakiniku Like",s:"Boga Group",c:"makanan",e:"🍖",t:"Diskon 30–50% sesuai level member Boga",k:"diskon",r:["Member Boga App","Tunjukin KTP","Red/Silver 30% (maks Rp75rb), Gold/Platinum 50% (maks Rp125rb)"],w:{f:0,t:14},b:{k:"min",t:"Belanja dulu"},m:true,v:"ok",src:["idn","beauty","bloomberg"]},
+{id:"tenten",n:"Tenten",s:"Boga Group",c:"makanan",e:"🍤",t:"Free Birthday Kakiage Tempura",k:"gratis",r:["Cukup tunjukin KTP","Bonus: member Boga App dapet diskon s.d. 50% sampai H+14"],w:{f:-7,t:7},b:{k:"none",t:"Cukup KTP"},m:false,v:"satu",src:["idn"]},
+{id:"shaburi",n:"Shaburi & Kintan Buffet",s:"Boga Group",c:"makanan",e:"🍲",t:"Free Birthday Meat Cake + promo Buy 3 Get 4",k:"gratis",r:["Member Boga App","Tunjukin KTP","Dateng rombongan (buat promo Buy 3 Get 4)"],w:{f:0,t:14},b:{k:"min",t:"Makan rombongan"},m:true,v:"ok",src:["idn","beauty"]},
+{id:"gokana",n:"Gokana",s:"Ramen & teppan",c:"makanan",e:"🍜",t:"Free Flying Ramen Birthday",k:"gratis",r:["Min. belanja Rp250rb (sebelum pajak)","Bawa KTP"],w:{f:-7,t:7},b:{k:"min",t:"Min. Rp250rb"},m:false,v:"satu",src:["idn"]},
+{id:"solosteak",n:"Solo Steak",s:"Steak",c:"makanan",e:"🍗",t:"Free chicken steak + es teh",k:"gratis",r:["Tunjukin KTP","Dine-in","Gak bisa digabung promo lain"],w:{f:0,t:0},b:{k:"none",t:"Cukup KTP"},m:false,v:"satu",src:["idn"]},
+{id:"moshimoshi",n:"Moshi Moshi BBQ",s:"All you can eat",c:"makanan",e:"🔥",t:"Free AYCE paket Mix Silver",k:"gratis",r:["Tunjukin KTP","Min. 2 orang (temen lo beli paket AYCE)"],w:{f:-7,t:7},b:{k:"min",t:"Min. 2 orang"},m:false,v:"satu",src:["idn"]},
+{id:"dapursolo",n:"Dapur Solo",s:"Masakan Jawa",c:"makanan",e:"🍚",t:"Free mini tumpeng",k:"gratis",r:["Beli 1 menu"],w:{f:-7,t:7},b:{k:"any",t:"Beli 1 menu"},m:false,v:"satu",src:["disway"]},
+{id:"ramen1",n:"Ramen1",s:"Ramen",c:"makanan",e:"🍙",t:"Free Onigiri",k:"gratis",r:["Post IG Story/Feed, tag @ramen1indonesia + 2 temen","Tunjukin postingannya ke staff"],w:{f:0,t:3},b:{k:"any",t:"Post IG"},m:false,v:"satu",src:["bloomberg"]},
+{id:"ebiga",n:"Ebiga Jjamppong",s:"Korean",c:"makanan",e:"🌶️",t:"Diskon s.d. 50% semua menu",k:"diskon",r:["Outlet tertentu aja","Gak bisa digabung promo lain"],w:{f:0,t:14},b:{k:"min",t:"Belanja dulu"},m:false,v:"satu",src:["bloomberg"]}
+];
+
+const CATS={makanan:{l:"Makanan",c:"var(--orange)"},minuman:{l:"Minuman",c:"var(--blue)"},dessert:{l:"Dessert",c:"var(--pink)"},lainnya:{l:"Lainnya",c:"var(--purple)"}};
+const VB={ok:"Udah dicek, ≥2 sumber",satu:"1 sumber artikel",sebagian:"Dicek sebagian",beda:"Info beda-beda, cek dulu",own:"Tambahan lo"};
+const AVC=["#ffe08a","#bdf0d0","#c9dcff","#ffd0dc","#e3d4ff","#ffd9b0","#c8f1ee"];
+const EMOJIS=["🎂","🍰","🍣","🍜","🍕","☕","🧋","🍦","🎁","💆"];
+const PRESETS=[
+  {v:"0,0",l:"Hari H aja"},{v:"0,3",l:"H s.d. H+3"},{v:"0,7",l:"H s.d. H+7"},{v:"-1,7",l:"H-1 s.d. H+7"},
+  {v:"-7,7",l:"H-7 s.d. H+7"},{v:"0,14",l:"H s.d. H+14"},{v:"-14,14",l:"H-14 s.d. H+14"},{v:"0,30",l:"H s.d. H+30"},
+  {v:"m",l:"Sebulan penuh di bulan ultah"},{v:"custom",l:"Atur sendiri…"}
+];
+
+/* ---------- date helpers ---------- */
+const DAY=86400000;
+const MON=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+const MONL=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+const WD=["Min","Sen","Sel","Rab","Kam","Jum","Sab"];
+const WDL=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+const d0=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
+const addD=(d,n)=>new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const diffD=(a,b)=>Math.round((d0(b)-d0(a))/DAY);
+const isLeap=y=>(y%4===0&&y%100!==0)||y%400===0;
+const fmt=d=>d.getDate()+" "+MON[d.getMonth()];
+const fmtW=d=>WD[d.getDay()]+", "+d.getDate()+" "+MON[d.getMonth()];
+const today=()=>d0(new Date());
+const daysWord=n=>n===0?"hari ini":n===1?"besok":n+" hari lagi";
+
+/* ---------- state ---------- */
+const LS="promoUltah.v1";
+let state={bday:null,claims:{},custom:[]};
+const ui={tab:"promo",q:"",cat:"all",f:{nomin:false,nomember:false,free:false,active:false,unclaimed:false},sort:"relevan",editBday:false,showPastAg:false};
+try{const s=JSON.parse(localStorage.getItem(LS)||"null");if(s&&typeof s==="object"){state.bday=validBday(s.bday);state.claims=(s.claims&&typeof s.claims==="object")?s.claims:{};state.custom=Array.isArray(s.custom)?s.custom.map(normCustom).filter(Boolean):[];}}catch(e){}
+function saveLocal(){try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){}}
+
+function validBday(b){if(!b)return null;const d=+b.d,m=+b.m;if(!(m>=1&&m<=12))return null;const max=new Date(2024,m,0).getDate();if(!(d>=1&&d<=max))return null;return {d,m};}
+function normCustom(p){
+  if(!p||typeof p!=="object"||!p.id||!p.n)return null;
+  const w=p.w&&p.w.m?{m:1}:{f:clampInt(p.w&&p.w.f,-60,0,0),t:clampInt(p.w&&p.w.t,0,90,7)};
+  const bk=p.b&&["none","any","min"].includes(p.b.k)?p.b.k:"any";
+  return {id:String(p.id),custom:true,n:String(p.n).slice(0,60),s:String(p.s||"").slice(0,60),c:CATS[p.c]?p.c:"makanan",e:EMOJIS.includes(p.e)?p.e:"🎁",t:String(p.t||"").slice(0,120),k:["gratis","b1g1","diskon"].includes(p.k)?p.k:"gratis",
+    r:Array.isArray(p.r)?p.r.map(x=>String(x).slice(0,140)).filter(Boolean).slice(0,10):[],w,b:{k:bk,t:String((p.b&&p.b.t)||buyDefault(bk)).slice(0,40)},m:!!p.m,l:p.l?clampInt(p.l,0,365,0):0,v:"own",note:String(p.note||"").slice(0,400),src:[]};
+}
+function clampInt(v,min,max,def){v=parseInt(v,10);if(isNaN(v))return def;return Math.max(min,Math.min(max,v));}
+function buyDefault(k){return k==="none"?"Gak perlu beli":k==="any"?"Beli apa aja":"Ada minimal";}
+function allPromos(){return BUILTIN.concat(state.custom);}
+function byId(id){return allPromos().find(p=>p.id===id);}
+
+function bdayOf(y){let d=state.bday.d;const m=state.bday.m;if(m===2&&d===29&&!isLeap(y))d=28;return new Date(y,m-1,d);}
+function cycleBday(){if(!state.bday)return null;const t=today(),Y=t.getFullYear();for(const y of [Y-1,Y,Y+1]){const b=bdayOf(y);if(diffD(b,t)<=31)return b;}return bdayOf(Y+1);}
+function cy(){const b=cycleBday();return String(b?b.getFullYear():today().getFullYear());}
+function isClaimed(id){const c=state.claims[cy()];return !!(c&&c[id]);}
+function range(p,b){if(p.w.m)return {s:new Date(b.getFullYear(),b.getMonth(),1),e:new Date(b.getFullYear(),b.getMonth()+1,0)};return {s:addD(b,p.w.f),e:addD(b,p.w.t)};}
+function info(p){
+  const claimed=isClaimed(p.id);const b=cycleBday();if(!b)return {claimed};
+  const t=today();const {s,e}=range(p,b);let st;
+  if(p.days&&!p.days.includes(b.getDay()))st="na";else if(t<s)st="soon";else if(t>e)st="past";else st="active";
+  const dl=(p.m&&p.l)?addD(b,-p.l):null;
+  return {b,s,e,st,claimed,dl,toStart:diffD(t,s),toEnd:diffD(t,e),toDl:dl?diffD(t,dl):null};
+}
+function wLabel(w){if(w.m)return "Bulan ultah";const f=w.f,t=w.t;if(f===0&&t===0)return "Hari H";const a=f===0?"H":"H"+f;const z=t===0?"H":"H+"+t;return a+" s.d. "+z;}
+function wClass(w){if(w.m)return "w-month";if(w.f===0&&w.t===0)return "w-h";if(w.t<=3)return "w-3";if(w.f<=-7&&w.t<=7)return "w-77";if(w.t<=7)return "w-7";if(w.t<=14)return "w-14";return "w-30";}
+function wLen(p){if(p.w.m)return 30;return p.w.t-p.w.f+1;}
+function avColor(id){let h=0;for(const ch of id)h=(h*31+ch.charCodeAt(0))>>>0;return AVC[h%AVC.length];}
+
+/* ---------- small UI bits ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const chkSvg='<svg aria-hidden="true"><use href="#i-chk"/></svg>';
+function wBadge(w){return `<span class="wb ${wClass(w)}"><svg aria-hidden="true"><use href="#i-cal"/></svg>${esc(wLabel(w))}</span>`;}
+function tagsHTML(p){
+  let h=wBadge(p.w)+`<span class="tag">${esc(p.b.t)}</span>`;
+  h+=p.m?`<span class="tag t-mem">Wajib member</span>`:`<span class="tag t-nomem">Tanpa member</span>`;
+  if(p.v==="beda")h+=`<span class="tag t-warn">⚠ Cek dulu</span>`;
+  if(p.custom)h+=`<span class="tag t-own">Tambahan lo</span>`;else if(!p.poster)h+=`<span class="tag t-new">Baru</span>`;
+  return h;
+}
+function statusHTML(i){
+  if(!i.st)return "";
+  if(i.claimed)return `<div class="pill claimed">✓ Udah diklaim tahun ini</div>`;
+  if(i.st==="na")return `<div class="pill na">Gak berlaku: ultah lo tahun ini hari ${WDL[i.b.getDay()]}</div>`;
+  if(i.st==="active")return `<div class="pill active">${i.toEnd===0?"Bisa diklaim · hari ini terakhir!":"Bisa diklaim · s.d. "+fmt(i.e)+" ("+i.toEnd+" hari lagi)"}</div>`;
+  if(i.st==="soon")return `<div class="pill soon">${diffD(i.s,i.e)===0?"Cuma "+fmtW(i.s):"Mulai "+fmtW(i.s)} · ${daysWord(i.toStart)}</div>`;
+  return `<div class="pill past">Udah lewat (s.d. ${fmt(i.e)})</div>`;
+}
+function memberHTML(i){
+  if(!i.dl||i.claimed||i.st==="past"||i.st==="na")return "";
+  if(i.toDl>=0)return `<div class="mwarn">Daftar member paling lambat <b>${fmtW(i.dl)}</b> (${daysWord(i.toDl)})</div>`;
+  return `<div class="mwarn late">Batas daftar member ${fmt(i.dl)} udah lewat. Kalau baru daftar sekarang, promonya baru dapet tahun depan.</div>`;
+}
+let toastT;
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2200);}
+
+/* ---------- birthday panel ---------- */
+function renderBday(){
+  const el=$("#bday");
+  if(!state.bday||ui.editBday){
+    const cur=state.bday||{d:1,m:today().getMonth()+1};
+    let dOpts="";for(let d=1;d<=31;d++)dOpts+=`<option value="${d}"${d===cur.d?" selected":""}>${d}</option>`;
+    let mOpts="";MONL.forEach((n,i)=>{mOpts+=`<option value="${i+1}"${i+1===cur.m?" selected":""}>${n}</option>`;});
+    el.innerHTML=`<form id="bf" novalidate>
+      <h2 class="bf-title">Kapan ultah lo?</h2>
+      <p class="bf-text">Isi tanggalnya, nanti tiap promo keliatan kapan bisa diklaim dan kapan harus udah daftar member.</p>
+      <div class="bf-row">
+        <label for="b-d" class="sr">Tanggal</label><select id="b-d">${dOpts}</select>
+        <label for="b-m" class="sr">Bulan</label><select id="b-m">${mOpts}</select>
+        <button class="btn primary" type="submit">Simpen</button>
+        ${state.bday?'<button class="btn" type="button" data-act="cancel-bday">Batal</button>':""}
+      </div>
+      <div class="err" id="b-err" role="alert"></div>
+    </form>`;
+    return;
+  }
+  const b=cycleBday(),t=today(),dd=diffD(t,b);
+  const list=allPromos().map(p=>({p,i:info(p)}));
+  const act=list.filter(x=>x.i.st==="active"&&!x.i.claimed).length;
+  const soon=list.filter(x=>x.i.st==="soon"&&!x.i.claimed).length;
+  const done=list.filter(x=>x.i.claimed).length;
+  const eligible=list.filter(x=>x.i.st!=="na").length;
+  const mem=list.filter(x=>x.i.dl&&!x.i.claimed&&x.i.st!=="past"&&x.i.st!=="na").sort((a,c)=>a.i.dl-c.i.dl);
+  const up=mem.filter(x=>x.i.toDl>=0),late=mem.filter(x=>x.i.toDl<0);
+  let when=dd>0?`<b>${dd} hari lagi</b>`:dd===0?"<b>hari ini!</b>":`${-dd} hari yang lalu`;
+  let feb=(state.bday.d===29&&state.bday.m===2&&!isLeap(b.getFullYear()))?`<div class="help" style="margin-top:6px">Tahun ${b.getFullYear()} gak ada 29 Feb, jadi dihitung 28 Feb. Tiap outlet bisa beda, tanya dulu ya.</div>`:"";
+  let mbox="";
+  if(up.length||late.length){
+    mbox=`<div class="mbox"><h3>Jangan lupa daftar member</h3>`;
+    if(up.length)mbox+=`<ul>${up.map(x=>`<li><button class="linkbtn" data-open="${x.p.id}">${esc(x.p.n)}</button>: paling lambat <b>${fmtW(x.i.dl)}</b> (${daysWord(x.i.toDl)})</li>`).join("")}</ul>`;
+    if(late.length)mbox+=`<div class="late">Batasnya udah lewat: ${late.map(x=>esc(x.p.n)).join(", ")}. Aman kalau lo udah member dari sebelumnya.</div>`;
+    mbox+=`</div>`;
+  }
+  el.innerHTML=`<div class="bday-row">
+      <div><div class="eyebrow">Ultah lo</div><div class="bday-date">${state.bday.d} ${MONL[state.bday.m-1]}</div>
+      <div class="bday-sub">${WDL[b.getDay()]}, ${fmt(b)} ${b.getFullYear()} · ${when}</div>
+      ${dd===0?'<div class="party">Selamat ulang tahun! Waktunya panen promo 🎉</div>':""}${feb}</div>
+      <button class="btn sm" type="button" data-act="edit-bday">Ubah</button>
+    </div>
+    <div class="stats">
+      <button class="stat s-act" type="button" data-act="stat-active"><b>${act}</b><span>Bisa diklaim sekarang</span></button>
+      <button class="stat s-soon" type="button" data-act="stat-soon"><b>${soon}</b><span>Belum mulai</span></button>
+      <button class="stat s-done" type="button" data-act="stat-done"><b>${done}<small style="font-size:16px">/${eligible}</small></b><span>Udah diklaim ${cy()}</span></button>
+    </div>${mbox}`;
+}
+
+/* ---------- list view ---------- */
+function renderChips(){
+  const cats=[["all","Semua"]].concat(Object.keys(CATS).map(k=>[k,CATS[k].l]));
+  $("#chips-cat").innerHTML=cats.map(([k,l])=>`<button type="button" class="chip cat" data-cat="${k}" aria-pressed="${ui.cat===k}">${l}</button>`).join("");
+  const fs=[["nomin","Tanpa min. belanja"],["nomember","Gak perlu member"],["free","Gratisan aja"]];
+  if(state.bday)fs.push(["active","Bisa diklaim sekarang"]);
+  fs.push(["unclaimed","Belum diklaim"]);
+  $("#chips-f").innerHTML=fs.map(([k,l])=>`<button type="button" class="chip" data-f="${k}" aria-pressed="${!!ui.f[k]}">${l}</button>`).join("");
+}
+function filtered(){
+  const q=ui.q.trim().toLowerCase();
+  let rows=allPromos().map(p=>({p,i:info(p)})).filter(({p,i})=>{
+    if(ui.cat!=="all"&&p.c!==ui.cat)return false;
+    if(q){const hay=[p.n,p.s,p.t,(p.r||[]).join(" "),CATS[p.c].l].join(" ").toLowerCase();if(!hay.includes(q))return false;}
+    if(ui.f.nomin&&!(p.b.k==="none"||p.b.k==="any"))return false;
+    if(ui.f.nomember&&p.m)return false;
+    if(ui.f.free&&p.k!=="gratis")return false;
+    if(ui.f.active&&state.bday&&i.st!=="active")return false;
+    if(ui.f.unclaimed&&i.claimed)return false;
+    return true;
+  });
+  const az=(a,b)=>a.p.n.localeCompare(b.p.n,"id");
+  if(ui.sort==="az")rows.sort(az);
+  else if(ui.sort==="panjang")rows.sort((a,b)=>wLen(b.p)-wLen(a.p)||az(a,b));
+  else if(state.bday){
+    const rank=x=>x.i.claimed?3:x.i.st==="active"?0:x.i.st==="soon"?1:x.i.st==="na"?4:5;
+    rows.sort((a,b)=>rank(a)-rank(b)||(a.i.st==="active"?a.i.e-b.i.e:a.i.s-b.i.s)||az(a,b));
+  }else rows.sort((a,b)=>(b.p.poster?1:0)-(a.p.poster?1:0)||az(a,b));
+  return rows;
+}
+function cardHTML({p,i}){
+  const cls=["card"];if(i.st)cls.push("st-"+i.st);if(i.claimed)cls.push("is-claimed");
+  return `<article class="${cls.join(" ")}" style="--cat:${CATS[p.c].c}" data-open="${p.id}">
+    <div class="c-top">
+      <div class="av" style="--av:${avColor(p.id)}" aria-hidden="true">${p.e}</div>
+      <div class="c-id"><button type="button" class="c-name" data-open="${p.id}">${esc(p.n)}</button><div class="c-sub">${esc(p.s||CATS[p.c].l)}</div></div>
+      <button type="button" class="chk${i.claimed?" on":""}" data-claim="${p.id}" aria-pressed="${i.claimed}" aria-label="${i.claimed?"Batalin tanda diklaim":"Tandai udah diklaim"}: ${esc(p.n)}" title="${i.claimed?"Udah diklaim":"Tandai udah diklaim"}">${chkSvg}</button>
+    </div>
+    <p class="c-treat">${esc(p.t)}</p>
+    <div class="tags">${tagsHTML(p)}</div>
+    ${statusHTML(i)}${memberHTML(i)}
+  </article>`;
+}
+function renderList(){
+  renderChips();
+  const rows=filtered(),total=allPromos().length;
+  $("#count").textContent=rows.length===total?`${total} promo`:`Nampilin ${rows.length} dari ${total} promo`;
+  $("#grid").innerHTML=rows.length?rows.map(cardHTML).join(""):`<div class="empty" style="grid-column:1/-1"><p>Gak ada promo yang cocok sama filter ini.</p><button class="btn" type="button" data-act="reset">Hapus semua filter</button></div>`;
+  $("#total-count").textContent=total;
+}
+
+/* ---------- schedule view ---------- */
+function renderJadwal(){
+  const el=$("#view-jadwal");
+  const b=cycleBday();
+  if(!b){el.innerHTML=`<div class="empty"><p>Isi tanggal ultah lo dulu biar jadwal klaimnya keluar.</p><button class="btn primary" type="button" data-act="focus-bday">Isi tanggal ultah</button></div>`;return;}
+  const t=today();
+  const rows=allPromos().map(p=>({p,i:info(p)}));
+  const ok=rows.filter(x=>x.i.st!=="na").sort((a,c)=>a.i.s-c.i.s||a.i.e-c.i.e||a.p.n.localeCompare(c.p.n,"id"));
+  const na=rows.filter(x=>x.i.st==="na");
+  let s0=b,e0=b;ok.forEach(x=>{if(x.i.s<s0)s0=x.i.s;if(x.i.e>e0)e0=x.i.e;});
+  const span=diffD(s0,e0)+1;const pc=d=>(diffD(s0,d)/span*100);
+  const o0=diffD(b,s0),o1=diffD(b,e0);let ticks="",lines="";
+  for(let o=Math.ceil(o0/7)*7;o<=o1;o+=7){const d=addD(b,o);const x=pc(d)+50/span;
+    ticks+=`<div class="tl-tick${o===0?" h":""}${(o/7)%2!==0?" minor":""}" style="left:${x}%">${o===0?"H":o>0?"H+"+o:"H"+o}<small>${fmt(d)}</small></div>`;
+    lines+=`<div class="tl-line" style="left:${x}%"></div>`;}
+  const hcol=`<div class="tl-hcol" style="left:${pc(b)}%;width:${100/span}%"></div>`;
+  const now=(t>=s0&&t<=e0)?`<div class="tl-now" style="left:calc(${pc(t)+50/span}% - 1px)"></div>`:"";
+  const bars=ok.map(({p,i})=>{const cls=i.claimed?"bar-claimed":"bar-"+i.st;
+    return `<button type="button" class="tl-row" data-open="${p.id}" aria-label="${esc(p.n)}: ${fmt(i.s)} sampai ${fmt(i.e)}"><span class="tl-name">${esc(p.n)}</span><span class="tl-track"><span class="tl-bar ${cls}" style="left:${pc(i.s)}%;width:${(diffD(i.s,i.e)+1)/span*100}%"></span></span></button>`;}).join("");
+  // agenda
+  const ev=[];
+  ok.forEach(({p,i})=>{
+    if(i.dl&&!i.claimed)ev.push({d:i.dl,k:"mem",p,i});
+    if(diffD(i.s,i.e)===0)ev.push({d:i.s,k:"only",p,i});else{ev.push({d:i.s,k:"start",p,i});ev.push({d:i.e,k:"end",p,i});}
+  });
+  const shown=ev.filter(x=>ui.showPastAg||x.d>=t).sort((a,c)=>a.d-c.d||order(a.k)-order(c.k)||a.p.n.localeCompare(c.p.n,"id"));
+  function order(k){return {mem:0,only:1,start:2,end:3}[k];}
+  const groups=[];shown.forEach(x=>{const g=groups[groups.length-1];if(g&&+g.d===+x.d)g.items.push(x);else groups.push({d:x.d,items:[x]});});
+  const KL={mem:"Daftar member",only:"Cuma hari ini",start:"Mulai",end:"Hari terakhir"};
+  const ag=groups.map(g=>{const dd=diffD(t,g.d),isH=+g.d===+b;
+    return `<div class="ag-day"><div class="ag-date${dd===0?" today":isH?" hday":""}"><b>${g.d.getDate()}</b><span>${MON[g.d.getMonth()]}</span></div>
+      <div><div class="ag-when">${WDL[g.d.getDay()]}${isH?" · Hari H 🎂":""} · ${dd<0?(-dd)+" hari lalu":daysWord(dd)}</div>
+      <div class="ag-items">${g.items.map(x=>`<button type="button" class="ag-item${x.i.claimed?" done":""}" data-open="${x.p.id}"><span class="k k-${x.k}">${KL[x.k]}</span><span><span class="nm">${esc(x.p.n)}</span> <span class="tr">${esc(x.k==="mem"?"buat promo "+x.p.t:x.p.t)}${x.i.claimed?" (udah diklaim)":""}</span></span></button>`).join("")}</div></div></div>`;}).join("");
+  el.innerHTML=`<div style="display:flex;flex-direction:column;gap:14px">
+    <div><h2 class="sec-title">Timeline klaim ${b.getFullYear()}</h2><p class="sec-sub">Tiap bar = periode klaim satu promo. Ketuk nama buat liat detailnya.</p></div>
+    <div class="tl-wrap"><div class="tl">
+      <div class="tl-axis"><span></span><div class="tl-ticks">${ticks}</div></div>
+      <div class="tl-body"><div class="tl-ov">${lines}${hcol}${now}</div>${bars}</div>
+    </div></div>
+    <div class="legend"><span><i class="sw" style="background:var(--green)"></i>Bisa diklaim</span><span><i class="sw" style="background:#9dbdff"></i>Belum mulai</span><span><i class="sw" style="background:#d6d5e3"></i>Udah lewat</span><span><i class="sw bar-claimed"></i>Udah diklaim</span><span><i class="sw line"></i>Hari ini</span><span><i class="sw h"></i>Hari H</span></div>
+    ${na.length?`<p class="sec-sub">Gak masuk timeline karena ultah lo jatuh di luar hari berlakunya: ${na.map(x=>esc(x.p.n)).join(", ")}.</p>`:""}
+    <div class="ag-head" style="margin-top:8px"><div><h2 class="sec-title">Tanggal penting</h2><p class="sec-sub">Kapan mulai, kapan terakhir, dan batas daftar member.</p></div>
+      <button class="btn sm" type="button" data-act="toggle-past">${ui.showPastAg?"Sembunyiin yang udah lewat":"Tampilin yang udah lewat"}</button></div>
+    <div class="panel ag">${ag||'<p style="margin:0;font-weight:700">Semua tanggal tahun ini udah lewat. Sampai jumpa di ultah berikutnya!</p>'}</div>
+  </div>`;
+}
+
+/* ---------- render ---------- */
+function render(){
+  renderBday();
+  $("#tab-promo").setAttribute("aria-selected",ui.tab==="promo");
+  $("#tab-jadwal").setAttribute("aria-selected",ui.tab==="jadwal");
+  $("#tab-promo").tabIndex=ui.tab==="promo"?0:-1;$("#tab-jadwal").tabIndex=ui.tab==="jadwal"?0:-1;
+  $("#view-promo").hidden=ui.tab!=="promo";$("#view-jadwal").hidden=ui.tab!=="jadwal";
+  if(ui.tab==="promo")renderList();else renderJadwal();
+  if(sheetFor)refreshSheet();
+}
+
+/* ---------- sheets ---------- */
+let sheetFor=null,lastFocus=null;
+function openSheet(html,label,forId){
+  lastFocus=document.activeElement;sheetFor=forId||null;
+  $("#modal-root").innerHTML=`<div class="overlay" data-act="overlay"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="${label}">${html}</div></div>`;
+  document.body.style.overflow="hidden";
+  const f=$("#modal-root .sheet [autofocus]")||$("#modal-root .sheet button, #modal-root .sheet input");if(f)f.focus();
+}
+function closeSheet(){$("#modal-root").innerHTML="";sheetFor=null;document.body.style.overflow="";if(lastFocus&&document.contains(lastFocus))lastFocus.focus();}
+function refreshSheet(){const p=byId(sheetFor);const sh=$("#modal-root .sheet");if(!p||!sh){if(sheetFor&&!p)closeSheet();return;}const st=sh.scrollTop;sh.innerHTML=detailHTML(p);sh.scrollTop=st;}
+function detailHTML(p){
+  const i=info(p);
+  let period="";
+  if(i.st){const one=diffD(i.s,i.e)===0;period=`<div class="period">Periode klaim ${i.b.getFullYear()}: ${one?fmtW(i.s)+" aja":fmtW(i.s)+" – "+fmtW(i.e)}</div>${statusHTML(i)}${memberHTML(i)?'<div style="margin-top:8px">'+memberHTML(i)+"</div>":""}`;}
+  else period=`<div class="hint">Isi tanggal ultah lo di atas biar keliatan tanggal persisnya.</div>`;
+  const srcs=p.custom?`<div>Lo yang nambahin promo ini.</div>`:p.src.map(k=>{const s=SRC[k];return s.u?`<a href="${s.u}" target="_blank" rel="noopener">${esc(s.n)}</a>`:`<span>${esc(s.n)}</span>`;}).join("");
+  const reqs=(p.r&&p.r.length?p.r:["Gak ada syarat tambahan"]);
+  return `<div class="sh-head"><div class="av big" style="--av:${avColor(p.id)}" aria-hidden="true">${p.e}</div>
+      <div><h2 id="sh-title">${esc(p.n)}</h2><div class="c-sub">${esc(p.s?p.s+" · ":"")}${CATS[p.c].l}</div></div>
+      <button type="button" class="x" data-act="close" aria-label="Tutup">×</button></div>
+    <p class="sh-treat">${esc(p.t)}</p>
+    <div class="tags">${tagsHTML(p)}</div>
+    ${period}
+    <h3>Syaratnya</h3><ul class="req">${reqs.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+    ${p.l?`<p class="help" style="margin:8px 0 0">Member harus udah terdaftar min. ${p.l} hari sebelum ultah.</p>`:""}
+    ${p.note?`<div class="note">${esc(p.note)}</div>`:""}
+    <h3>Sumber</h3><div class="srcs"><span class="vb ${p.v}">${VB[p.v]}</span>${srcs}</div>
+    <div class="sh-actions">
+      <button type="button" class="btn primary" data-claim="${p.id}">${i.claimed?"Batalin tanda diklaim":"✓ Tandai udah diklaim"}</button>
+      ${p.custom?`<button type="button" class="btn" data-act="edit-custom" data-id="${p.id}">Edit</button><button type="button" class="btn danger" data-act="del-custom" data-id="${p.id}">Hapus</button>`:""}
+    </div>`;
+}
+function openDetail(id){const p=byId(id);if(!p)return;openSheet(detailHTML(p),"sh-title",id);}
+
+function formHTML(p){
+  const e=p||{n:"",s:"",c:"makanan",e:"🎁",t:"",k:"gratis",r:[],w:{f:0,t:7},b:{k:"any",t:""},m:false,l:0,note:""};
+  const wv=e.w.m?"m":(PRESETS.find(x=>x.v===e.w.f+","+e.w.t)?e.w.f+","+e.w.t:"custom");
+  const radio=(name,val,label,cur)=>`<label><input type="radio" name="${name}" value="${val}"${cur===val?" checked":""}> ${label}</label>`;
+  return `<div class="sh-head"><h2 id="fm-title">${p?"Edit promo":"Tambah promo"}</h2><button type="button" class="x" data-act="close" aria-label="Tutup">×</button></div>
+  <form class="form" id="pf" novalidate>
+    <div class="field"><label for="f-n">Nama brand</label><input id="f-n" type="text" maxlength="60" value="${esc(e.n)}" placeholder="mis. Kopi Kenangan" autofocus></div>
+    <div class="field"><label for="f-t">Dapetnya apa?</label><input id="f-t" type="text" maxlength="120" value="${esc(e.t)}" placeholder="mis. Free 1 slice cake"></div>
+    <div class="two">
+      <div class="field"><label for="f-c">Kategori</label><select id="f-c">${Object.keys(CATS).map(k=>`<option value="${k}"${e.c===k?" selected":""}>${CATS[k].l}</option>`).join("")}</select></div>
+      <div class="field"><label for="f-s">Keterangan (opsional)</label><input id="f-s" type="text" maxlength="60" value="${esc(e.s)}" placeholder="mis. Bakery"></div>
+    </div>
+    <fieldset class="field"><legend>Ikon</legend><div class="radios emo">${EMOJIS.map((x,ix)=>`<label title="${x}"><input type="radio" name="f-e" id="f-e-${ix}" value="${x}"${e.e===x?" checked":""}>${x}</label>`).join("")}</div></fieldset>
+    <fieldset class="field"><legend>Jenis hadiah</legend><div class="radios">${radio("f-k","gratis","Gratis",e.k)}${radio("f-k","b1g1","Buy 1 Get 1",e.k)}${radio("f-k","diskon","Diskon",e.k)}</div></fieldset>
+    <div class="field"><label for="f-w">Periode klaim</label><select id="f-w">${PRESETS.map(x=>`<option value="${x.v}"${wv===x.v?" selected":""}>${x.l}</option>`).join("")}</select></div>
+    <div class="two" id="f-wc"${wv==="custom"?"":" hidden"}>
+      <div class="field"><label for="f-wf">Mulai berapa hari sebelum H?</label><input id="f-wf" type="number" min="0" max="60" inputmode="numeric" value="${e.w.m?0:-e.w.f}"></div>
+      <div class="field"><label for="f-wt">Sampai berapa hari setelah H?</label><input id="f-wt" type="number" min="0" max="90" inputmode="numeric" value="${e.w.m?7:e.w.t}"></div>
+    </div>
+    <fieldset class="field"><legend>Harus belanja?</legend><div class="radios">${radio("f-bk","none","Gak perlu beli",e.b.k)}${radio("f-bk","any","Beli apa aja",e.b.k)}${radio("f-bk","min","Ada minimal",e.b.k)}</div>
+      <div id="f-btw"${e.b.k==="min"?"":" hidden"} style="margin-top:6px"><label for="f-bt" class="sr">Minimalnya apa</label><input id="f-bt" type="text" maxlength="40" value="${esc(e.b.k==="min"?e.b.t:"")}" placeholder="Minimalnya apa? mis. Min. Rp50rb"></div></fieldset>
+    <label class="checkline" for="f-m"><input id="f-m" type="checkbox"${e.m?" checked":""}> Wajib member / daftar app</label>
+    <div class="field" id="f-lw"${e.m?"":" hidden"}><label for="f-l">Harus daftar min. berapa hari sebelum ultah? (opsional)</label><input id="f-l" type="number" min="0" max="365" inputmode="numeric" value="${e.l||""}" placeholder="mis. 30"></div>
+    <div class="field"><label for="f-r">Syarat lain (satu per baris)</label><textarea id="f-r" rows="3" placeholder="Tunjukin KTP&#10;Dine-in">${esc((e.r||[]).join("\n"))}</textarea></div>
+    <div class="field"><label for="f-note">Catatan (opsional)</label><textarea id="f-note" rows="2" maxlength="400">${esc(e.note||"")}</textarea></div>
+    <div class="err" id="f-err" role="alert"></div>
+    <div class="sh-actions" style="margin-top:4px"><button type="submit" class="btn primary">${p?"Simpen perubahan":"Simpen promo"}</button><button type="button" class="btn" data-act="close">Batal</button></div>
+    <input type="hidden" id="f-id" value="${p?esc(p.id):""}">
+  </form>`;
+}
+function openForm(p){openSheet(formHTML(p),"fm-title",null);}
+function submitForm(){
+  const v=id=>($("#"+id)||{}).value||"";
+  const n=v("f-n").trim(),t=v("f-t").trim(),err=$("#f-err");
+  if(!n){err.textContent="Nama brand-nya diisi dulu.";$("#f-n").focus();return;}
+  if(!t){err.textContent="Hadiahnya apa? Isi dulu ya.";$("#f-t").focus();return;}
+  const wv=v("f-w");let w;
+  if(wv==="m")w={m:1};else if(wv==="custom"){const f=clampInt(v("f-wf"),0,60,0),tt=clampInt(v("f-wt"),0,90,7);w={f:-f,t:tt};}
+  else{const [a,z]=wv.split(",").map(Number);w={f:a,t:z};}
+  const bk=(document.querySelector('input[name="f-bk"]:checked')||{}).value||"any";
+  const bt=bk==="min"?(v("f-bt").trim()||"Ada minimal"):buyDefault(bk);
+  const m=$("#f-m").checked;
+  const raw={id:v("f-id")||("c_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)),n,s:v("f-s").trim(),c:v("f-c"),
+    e:(document.querySelector('input[name="f-e"]:checked')||{}).value||"🎁",t,k:(document.querySelector('input[name="f-k"]:checked')||{}).value||"gratis",
+    r:v("f-r").split("\n").map(x=>x.trim()).filter(Boolean),w,b:{k:bk,t:bt},m,l:m?clampInt(v("f-l"),0,365,0):0,note:v("f-note").trim()};
+  const p=normCustom(raw);const ix=state.custom.findIndex(x=>x.id===p.id);
+  if(ix>=0)state.custom[ix]=p;else state.custom.push(p);
+  persist("custom");closeSheet();render();toast(ix>=0?"Promo diupdate":"Promo ditambahin");
+}
+
+/* ---------- actions ---------- */
+function toggleClaim(id){
+  const y=cy();const c=Object.assign({},state.claims[y]||{});
+  const was=!!c[id];if(was)delete c[id];else c[id]=new Date().toISOString().slice(0,10);
+  state.claims=Object.assign({},state.claims,{[y]:c});
+  persist("claims",400);render();toast(was?"Tanda diklaim dibatalin":"Mantap, dicatat udah diklaim ✓");
+}
+function setTab(tab,push){ui.tab=tab;if(push){try{history.replaceState(null,"","#"+(tab==="jadwal"?"jadwal":"promo"));}catch(e){}}render();}
+
+document.addEventListener("click",e=>{
+  const t=e.target;
+  const claim=t.closest("[data-claim]");if(claim){e.stopPropagation();toggleClaim(claim.dataset.claim);return;}
+  const act=t.closest("[data-act]");
+  if(act){const a=act.dataset.act;
+    if(a==="overlay"){if(t===act)closeSheet();return;}
+    if(a==="close"){closeSheet();return;}
+    if(a==="edit-bday"){ui.editBday=true;render();const s=$("#b-d");if(s)s.focus();return;}
+    if(a==="cancel-bday"){ui.editBday=false;render();return;}
+    if(a==="focus-bday"){const s=$("#b-d");if(s){s.scrollIntoView({behavior:"smooth",block:"center"});s.focus();}return;}
+    if(a==="reset"){ui.q="";$("#q").value="";ui.cat="all";Object.keys(ui.f).forEach(k=>ui.f[k]=false);render();return;}
+    if(a==="stat-active"||a==="stat-soon"||a==="stat-done"){ui.tab="promo";ui.cat="all";Object.keys(ui.f).forEach(k=>ui.f[k]=false);ui.sort="relevan";$("#sort").value="relevan";if(a==="stat-active")ui.f.active=true;render();$("#chips-cat").scrollIntoView({behavior:"smooth",block:"start"});return;}
+    if(a==="toggle-past"){ui.showPastAg=!ui.showPastAg;render();return;}
+    if(a==="edit-custom"){const p=byId(act.dataset.id);if(p){closeSheet();openForm(p);}return;}
+    if(a==="del-custom"){
+      if(act.dataset.confirm!=="1"){act.dataset.confirm="1";act.textContent="Yakin? Ketuk lagi buat hapus";return;}
+      const id=act.dataset.id;state.custom=state.custom.filter(x=>x.id!==id);
+      Object.keys(state.claims).forEach(y=>{if(state.claims[y][id]){const c=Object.assign({},state.claims[y]);delete c[id];state.claims[y]=c;}});
+      persist("custom");persist("claims");closeSheet();render();toast("Promo dihapus");return;}
+  }
+  const tab=t.closest("[data-tab]");if(tab){setTab(tab.dataset.tab,true);return;}
+  const cat=t.closest("[data-cat]");if(cat){ui.cat=cat.dataset.cat;render();return;}
+  const f=t.closest("[data-f]");if(f){ui.f[f.dataset.f]=!ui.f[f.dataset.f];render();return;}
+  const op=t.closest("[data-open]");if(op&&!t.closest("a")){openDetail(op.dataset.open);return;}
+});
+document.addEventListener("submit",e=>{
+  if(e.target.id==="bf"){e.preventDefault();const d=+$("#b-d").value,m=+$("#b-m").value;const b=validBday({d,m});
+    if(!b){$("#b-err").textContent=`Tanggal ${d} gak ada di bulan ${MONL[m-1]}. Coba cek lagi.`;return;}
+    state.bday=b;ui.editBday=false;persist("profile");render();toast("Tanggal ultah disimpen");return;}
+  if(e.target.id==="pf"){e.preventDefault();submitForm();}
+});
+document.addEventListener("change",e=>{
+  const t=e.target;
+  if(t.id==="f-w")$("#f-wc").hidden=t.value!=="custom";
+  if(t.name==="f-bk")$("#f-btw").hidden=t.value!=="min";
+  if(t.id==="f-m")$("#f-lw").hidden=!t.checked;
+  if(t.id==="sort"){ui.sort=t.value;render();}
+});
+let qT;$("#q").addEventListener("input",e=>{clearTimeout(qT);qT=setTimeout(()=>{ui.q=e.target.value;renderList();},120);});
+$("#fab").addEventListener("click",()=>openForm(null));
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&$("#modal-root").innerHTML){closeSheet();return;}
+  if(e.key==="Tab"&&$("#modal-root").innerHTML){const f=[...document.querySelectorAll("#modal-root .sheet button, #modal-root .sheet input, #modal-root .sheet select, #modal-root .sheet textarea, #modal-root .sheet a")].filter(x=>!x.closest("[hidden]")&&x.type!=="hidden");if(!f.length)return;const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+  if((e.key==="ArrowRight"||e.key==="ArrowLeft")&&e.target.closest&&e.target.closest('[role="tab"]')){const nt=ui.tab==="promo"?"jadwal":"promo";setTab(nt,true);$("#tab-"+nt).focus();}
+});
+function fromHash(){const h=(location.hash||"").replace("#","");ui.tab=h==="jadwal"?"jadwal":"promo";}
+window.addEventListener("hashchange",()=>{fromHash();render();});
+
+/* ---------- persistence: localStorage only (data stays in this browser) ---------- */
+let storageOk=true;
+try{const k="__pu_test";localStorage.setItem(k,"1");localStorage.removeItem(k);}catch(e){storageOk=false;}
+function persist(){saveLocal();}
+function setSync(){const el=$("#sync");if(!el)return;
+  el.className="sync "+(storageOk?"cloud":"error");
+  el.textContent=storageOk?"Tanggal ultah, checklist & promo tambahan lo cuma kesimpen di browser ini. Gak dikirim ke mana-mana.":"Browser ini gak ngizinin nyimpen data (mode private?). Data bakal ilang pas halaman ditutup.";}
+window.addEventListener("storage",e=>{if(e.key!==LS)return;try{const s=JSON.parse(e.newValue||"null");if(s){state.bday=validBday(s.bday);state.claims=(s.claims&&typeof s.claims==="object")?s.claims:{};state.custom=Array.isArray(s.custom)?s.custom.map(normCustom).filter(Boolean):[];render();}}catch(err){}});
+
+/* ---------- confetti ---------- */
+function confetti(){
+  const cv=$("#confetti");if(!cv)return;const r=cv.getBoundingClientRect();const dpr=Math.min(2,window.devicePixelRatio||1);
+  cv.width=Math.round(r.width*dpr);cv.height=Math.round(r.height*dpr);const ctx=cv.getContext("2d");ctx.scale(dpr,dpr);ctx.clearRect(0,0,r.width,r.height);
+  const cols=["#ff4f79","#2f7cf6","#1fa45c","#ffd23f","#ff9a1f","#8b5cf6","#41c6d8"];
+  let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};
+  const n=Math.round(r.width*r.height/2600);
+  for(let i=0;i<n;i++){
+    const x=rnd()*r.width,y=rnd()*r.height;
+    if(x<Math.min(380,r.width*.62)&&y>r.height*.12&&y<r.height*.92&&rnd()<.75)continue;
+    ctx.save();ctx.translate(x,y);ctx.rotate(rnd()*Math.PI);ctx.fillStyle=cols[Math.floor(rnd()*cols.length)];ctx.globalAlpha=.85;
+    const kind=rnd();
+    if(kind<.45)ctx.fillRect(-5,-2,10,4);
+    else if(kind<.75){ctx.beginPath();ctx.arc(0,0,3,0,Math.PI*2);ctx.fill();}
+    else{ctx.beginPath();ctx.moveTo(-4,3);ctx.lineTo(4,3);ctx.lineTo(0,-4);ctx.closePath();ctx.fill();}
+    ctx.restore();
+  }
+}
+let cT;window.addEventListener("resize",()=>{clearTimeout(cT);cT=setTimeout(confetti,150);});
+
+/* ---------- boot ---------- */
+fromHash();render();confetti();setSync();
+})();
+</script>
+</body>
+</html>
