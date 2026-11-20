@@ -1,6 +1,6 @@
 # Promo Ultah 🎂
 
-Kumpulan birthday treat dari 37 brand di Indonesia, dalam satu halaman. Isi tanggal ultah lo, dan app ini langsung nunjukin promo mana yang bisa diklaim kapan, sampai kapan, dan kapan paling lambat lo harus udah daftar member.
+Kumpulan birthday treat dari 49 brand di Indonesia, dalam satu halaman. Isi tanggal ultah lo, dan app ini langsung nunjukin promo mana yang bisa diklaim kapan, sampai kapan, dan kapan paling lambat lo harus udah daftar member.
 
 ## Fitur
 
