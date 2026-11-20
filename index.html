@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Promo Ultah</title>
-<meta name="description" content="Kumpulan birthday treat dari 37 brand di Indonesia: isi tanggal ultah, liat promo mana yang bisa diklaim kapan, dan centang yang udah diambil.">
+<meta name="description" content="Kumpulan birthday treat dari 49 brand di Indonesia: isi tanggal ultah, liat promo mana yang bisa diklaim kapan, dan centang yang udah diambil.">
 <meta property="og:title" content="Promo Ultah: semua birthday treat, satu tempat">
 <meta property="og:description" content="Isi tanggal ultah lo, liat promo mana yang bisa diklaim kapan, dan batas daftar membernya. Data lo cuma kesimpen di browser lo.">
 <meta property="og:type" content="website">
@@ -268,7 +268,7 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
     <div>
       <h1 class="title">PROMO<br>ULTAH</h1>
       <div class="ribbon">Semua birthday treat, satu tempat</div>
-      <div class="checked">Data dicek ulang 19 Nov 2026 · <span id="total-count">37</span> promo</div>
+      <div class="checked">Data dicek ulang 19 Nov 2026 · <span id="total-count">49</span> promo</div>
     </div>
     <div class="balloons" aria-hidden="true"><span class="balloon b1"></span><span class="balloon b2"></span><span class="balloon b3"></span></div>
   </div>
@@ -336,7 +336,24 @@ const SRC={
   karnivor:{n:"TikTok resmi @karnivor_id",u:"https://www.tiktok.com/@karnivor_id/video/7527925400710810898"},
   kokuo:{n:"Postingan pengguna di X (2026)",u:"https://x.com/Lenny_diary/status/2013167026731446328"},
   gigglebox:{n:"TikTok @giggleboxcafe",u:"https://www.tiktok.com/discover/resto-yang-ngasih-birthday-treat-bandung?lang=en"},
-  momsmoney:{n:"Kontan MomsMoney, Chatime Birthday Treats",u:"https://momsmoney.kontan.co.id/news/promo-chatime-birthday-treats-pakai-aplikasi-fb-id-dan-dapatkan-diskon-50"}
+  momsmoney:{n:"Kontan MomsMoney, Chatime Birthday Treats",u:"https://momsmoney.kontan.co.id/news/promo-chatime-birthday-treats-pakai-aplikasi-fb-id-dan-dapatkan-diskon-50"},
+  cinepolis:{n:"Cinepolis Indonesia, Birthday Reward (resmi)",u:"https://www.cinepolis.co.id/promo/birthday-reward-club-cinepolis/368e6bb7-d3a3-49c1-8b1a-72d48be0f4ff/"},
+  cinetiktok:{n:"TikTok @rahmaaw__, Birthday treat Cinepolis",u:"https://www.tiktok.com/@rahmaaw__/video/7537933816778853637"},
+  cgv:{n:"CGV Indonesia, Benefit Member (resmi)",u:"https://www.cgv.id/en/membership/benefit"},
+  selfietime:{n:"TikTok resmi @selfietimeid",u:"https://www.tiktok.com/@selfietimeid/video/7537562900458704136"},
+  idnjogja:{n:"IDN Times, Promo Birthday Treat Jogja",u:"https://www.idntimes.com/business/economy/promo-birthday-treat-jogja-2025-q9t03-00-qftxr-s3ly6d"},
+  pikiran:{n:"Pikiran Rakyat, Birthday Treats Mall Semarang",u:"https://www.pikiran-rakyat.com/gaya-hidup/pr-019467826/daftar-10-resto-di-mall-semarang-yang-menawarkan-birthday-treats-jangan-sampai-skip"},
+  idnmin:{n:"IDN Times, Birthday Treats Minuman 2026",u:"https://www.idntimes.com/food/dining-guide/birthday-treats-minuman-2026-00-p3rq2-wjrj50"},
+  xjiwa:{n:"Postingan pengguna di X (2026), Janji Jiwa",u:"https://x.com/rafikarchmwt/status/2038548224995397903"},
+  poinku:{n:"Girls Beyond, Birthday Treats Kopi",u:"https://girlsbeyond.com/2025/09/12/lifestyle/deretan-birthday-treats-kopi-yang-bisa-kamu-nikmati-pas-ulang-tahun"},
+  idnscorpio:{n:"IDN Times, Birthday Treat Scorpio (Nov 2026)",u:"https://www.idntimes.com/food/dining-guide/deretan-promo-birthday-treat-untuk-scorpio-november-2026-00-mk1yf-mxz2k1"},
+  katraacha:{n:"Katalog Promosi, Raa Cha Birthday Treats",u:"https://katalogpromosi.com/promo-raa-cha-birthday-treats-gratis-meat-cake/"},
+  foodsushiyay:{n:"FoodieRate, Sushi Yay Birthday Treat",u:"https://www.foodierate.com/deal/promo-sushi-yay-birthday-treat-free-birthday-sushi"},
+  tiktoksushiyay:{n:"TikTok resmi @sushiyayid",u:"https://www.tiktok.com/@sushiyayid/video/7432264218906250503"},
+  idn2026:{n:"IDN Times, Promo Makanan Ulang Tahun 2026",u:"https://www.idntimes.com/food/dining-guide/promo-makanan-ulang-tahun-sepanjang-2026-00-mk1yf-st1786"},
+  foodimperial:{n:"FoodieRate, Imperial Kitchen Birthday",u:"https://www.foodierate.com/deal/promo-birthday-imperial-kitchen-dimsum-free-bun-voucher-100k"},
+  pantiestt:{n:"TikTok resmi @pantiespizzajogja",u:"https://www.tiktok.com/@pantiespizzajogja"},
+  yummycoin:{n:"Threads @giladiskonn, Yummy Coin",u:"https://www.threads.com/@giladiskonn/post/DNPl7GvpajV/khusus-yang-ulang-tahun-di-bulan-agustus-bisa-klaim-1-produk-yummy-coin-gratis-k"}
 };
 
 /* ---------- data ----------
@@ -381,7 +398,19 @@ const BUILTIN=[
 {id:"moshimoshi",n:"Moshi Moshi BBQ",s:"All you can eat",c:"makanan",e:"🔥",t:"Free AYCE paket Mix Silver",k:"gratis",r:["Tunjukin KTP","Min. 2 orang (temen lo beli paket AYCE)"],w:{f:-7,t:7},b:{k:"min",t:"Min. 2 orang"},m:false,v:"satu",src:["idn"]},
 {id:"dapursolo",n:"Dapur Solo",s:"Masakan Jawa",c:"makanan",e:"🍚",t:"Free mini tumpeng",k:"gratis",r:["Beli 1 menu"],w:{f:-7,t:7},b:{k:"any",t:"Beli 1 menu"},m:false,v:"satu",src:["disway"]},
 {id:"ramen1",n:"Ramen1",s:"Ramen",c:"makanan",e:"🍙",t:"Free Onigiri",k:"gratis",r:["Post IG Story/Feed, tag @ramen1indonesia + 2 temen","Tunjukin postingannya ke staff"],w:{f:0,t:3},b:{k:"any",t:"Post IG"},m:false,v:"satu",src:["bloomberg"]},
-{id:"ebiga",n:"Ebiga Jjamppong",s:"Korean",c:"makanan",e:"🌶️",t:"Diskon s.d. 50% semua menu",k:"diskon",r:["Outlet tertentu aja","Gak bisa digabung promo lain"],w:{f:0,t:14},b:{k:"min",t:"Belanja dulu"},m:false,v:"satu",src:["bloomberg"]}
+{id:"ebiga",n:"Ebiga Jjamppong",s:"Korean",c:"makanan",e:"🌶️",t:"Diskon s.d. 50% semua menu",k:"diskon",r:["Outlet tertentu aja","Gak bisa digabung promo lain"],w:{f:0,t:14},b:{k:"min",t:"Belanja dulu"},m:false,v:"satu",src:["bloomberg"]},
+{id:"cinepolis",n:"Cinepolis",s:"Club Cinepolis",c:"lainnya",e:"🎬",t:"Free tiket nonton + popcorn",k:"gratis",r:["Daftarin tgl lahir di app Cinepolis (cuma bisa 1x)","Pernah transaksi min. Rp100.000 (tiket/F&B), paling lambat H-3","Bawa ID fisik (KTP/SIM/Kartu Pelajar/KK), tgl lahir tampil di app/email (bukan screenshot)"],w:{f:0,t:30},b:{k:"none",t:"Gak perlu beli, tapi harus udah pernah transaksi"},m:true,l:3,v:"ok",note:"Halaman resmi gak nyebut jumlah tiket. Testimoni pengguna: 2 tiket + popcorn, tukar H sampai H+30. Program berlaku s.d. 31 Des 2026.",src:["cinepolis","cinetiktok"]},
+{id:"cgv",n:"CGV",s:"Member CGV",c:"lainnya",e:"🍿",t:"Free Combo di hari ultah (Solo/Duo)",k:"gratis",r:["Jadi member CGV min. 1 bulan, akun terverifikasi","Combo Solo untuk Classic, Combo Duo untuk Gold/VIP","Syarat & ketentuan lengkap dicek di app CGV"],w:{f:0,t:0},b:{k:"none",t:"Gak perlu beli"},m:true,l:30,v:"satu",note:"Cuma dari halaman benefit resmi, S&K detailnya gak ditampilin. Cek di app sebelum dateng.",src:["cgv"]},
+{id:"selfitime",n:"Selfie Time",s:"Self photo studio",c:"lainnya",e:"📸",t:"Voucher foto gratis senilai Rp45.000",k:"gratis",r:["Pengguna membership Selfie Time","Voucher aktif 7 hari setelah tanggal registrasi","Berlaku untuk produk kategori A (Photo Booth A, High Angle A, Wide Angle A)","Dipakai 1x selama masa promo"],w:{f:0,t:7},b:{k:"none",t:"Pakai voucher"},m:true,l:7,v:"satu",note:"Promonya dirilis per periode (contoh: ultah Jul-Agu), cek IG/website Selfie Time buat periode bulan ultah lo.",src:["selfietime"]},
+{id:"yamiepanda",n:"Yamie Panda",s:"Bakmi",c:"makanan",e:"🍜",t:"Free Yamie Asin/Manis (porsi sedang) + diskon 25% buat traktir teman",k:"gratis",r:["Member app Yamie Panda (data diri terisi)","Tukar voucher Kado Ultah di app","Tunjukin ID valid, gak bisa diwakilkan","Free Yamie: beli min. 1 menu apa aja (kecuali extra topping, es batu, menu promo), dine-in","Diskon 25% maks. 10 porsi, dine-in & take away"],w:{m:1},b:{k:"any",t:"Beli 1 menu"},m:true,v:"ok",note:"Jogja & Semarang. Cabang lain cek app dulu.",src:["idnjogja","pikiran"]},
+{id:"janjijiwa",n:"Janji Jiwa",s:"Kopi",c:"minuman",e:"☕",t:"Voucher diskon 50%",k:"diskon",r:["User app Jiwa+","Jadi member s.d. 1 bulan sebelum ultah dan udah transaksi sekali","Voucher muncul di app, 1x per transaksi","Pick-up & delivery bisa"],w:{f:-4,t:4},b:{k:"none",t:"Tanpa minimum"},m:true,l:30,v:"beda",note:"Info beda-beda: maks. potongan Rp30.000 (IDN Times) vs Rp50.000 (pengguna, 2026). Masa berlaku di app sekitar H-4 s.d. H+4, cek voucher lo.",src:["idnmin","xjiwa"]},
+{id:"pointcoffee",n:"Point Coffee",s:"Indomaret",c:"minuman",e:"☕",t:"Free 1 minuman (i-kupon)",k:"gratis",r:["Member Indomaret Poinku, tgl lahir terisi benar","Notifikasi i-kupon muncul di app sekitar 9 hari sebelum ultah","Tunjukin kupon ke kasir/barista Point Coffee","Menu seasonal biasanya gak termasuk"],w:{f:-9,t:9},b:{k:"none",t:"Gak perlu beli"},m:true,v:"beda",note:"Masa berlaku beda: IDN Times bilang s.d. 30 hari setelah ultah, pengalaman pengguna H+9. Cek tanggal expired di kupon lo.",src:["idnmin","poinku"]},
+{id:"raacha",n:"Raa Cha Suki & BBQ",s:"Suki & BBQ",c:"makanan",e:"🍖",t:"Free Birthday Meat Cake",k:"gratis",r:["Min. belanja Rp300.000 sebelum pajak","Tunjukin KTP / kartu identitas / akta lahir / KK","Dine-in, outlet tertentu, selama persediaan ada"],w:{f:0,t:7},b:{k:"min",t:"Min. Rp300rb (sebelum pajak)"},m:false,v:"ok",note:"Beberapa sumber nyebut min. Rp350rb. Raa Cha Pajajaran Bogor pernah: Meat Tower dengan min. Rp750rb. Konfirmasi ke outlet.",src:["idnscorpio","katraacha"]},
+{id:"sushiyay",n:"Sushi Yay!",s:"Sushi",c:"makanan",e:"🍣",t:"Free Birthday Sushi",k:"gratis",r:["Tunjukin KTP/SIM","Dine-in, semua cabang","Order menu apa aja, tanpa minimum"],w:{f:0,t:7},b:{k:"any",t:"Order apa aja"},m:false,v:"ok",note:"Akun resmi sempat nulis klaim bisa mulai H-7, sumber lain mulai hari H. Aman datang H s.d. H+7.",src:["foodsushiyay","tiktoksushiyay"]},
+{id:"imperial",n:"Imperial Kitchen & Dimsum",s:"Dimsum",c:"makanan",e:"🥟",t:"Free Chinese Birthday Bun (+ e-voucher Rp100.000 buat member Imperial Card)",k:"gratis",r:["Tunjukin KTP/identitas","Beli min. 1 main course","Dine-in"],w:{f:-7,t:7},b:{k:"any",t:"Beli 1 main course"},m:false,v:"ok",note:"E-voucher Rp100rb khusus member Imperial Card. Ada sumber lama yang nyebut min. order Rp50rb.",src:["idn2026","foodimperial"]},
+{id:"pantiespizza",n:"Panties Pizza",s:"Pizza (Jogja)",c:"makanan",e:"🍕",t:"Free 1 pizza + diskon 20% sebulan ultah",k:"gratis",r:["Free pizza harus ditukar di tanggal ultah, beli min. 1 minuman/menu","Tunjukin KTP","Diskon 20% berlaku di bulan ultah","Pembelian take away & dine-in, ikuti semua medsos mereka"],w:{f:0,t:0},b:{k:"any",t:"Beli minum / menu apa aja"},m:false,v:"sebagian",note:"Info dari outlet Jogja. Cabang kota lain belum ketemu infonya.",src:["idnjogja","pantiestt"]},
+{id:"gococo",n:"Gococo",s:"Coco Water & Shake",c:"minuman",e:"🥥",t:"Free Coco Water medium",k:"gratis",r:["Beli 1 Coco Shake regular (varian bebas)","Tunjukin KTP"],w:{f:0,t:3},b:{k:"any",t:"Beli 1 Coco Shake regular"},m:false,v:"satu",src:["idnmin"]},
+{id:"yummycoin",n:"Yummy Coin",s:"Korean Coin Pancake",c:"dessert",e:"🥞",t:"Free 1 produk Yummy Coin",k:"gratis",r:["Tunjukin bukti ultah: KTP/KIA/kartu pelajar/KK","Berlaku di semua cabang"],w:{m:1},b:{k:"none",t:"Gak perlu beli"},m:false,v:"satu",note:"Dari postingan promo bulan Agustus. Format bulanan, mestinya sama tiap bulan, cek IG Yummy Coin.",src:["yummycoin"]}
 ];
 
 const CATS={makanan:{l:"Makanan",c:"var(--orange)"},minuman:{l:"Minuman",c:"var(--blue)"},dessert:{l:"Dessert",c:"var(--pink)"},lainnya:{l:"Lainnya",c:"var(--purple)"}};
